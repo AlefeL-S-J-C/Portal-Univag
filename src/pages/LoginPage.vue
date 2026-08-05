@@ -17,74 +17,74 @@
           Central de ajuda
         </button>
       </header>
-  
-        <!-- Área Central (Card) -->
-        <!-- 'flex-1' faz essa área ocupar o restante da tela, centralizando o cartão -->
-            <main class="flex-1 flex items-center justify-center p-4">
 
-          <!-- Cartão: Tamanho reduzido de max-w-4xl para max-w-3xl para ficar mais compacto -->
-          <div class="bg-white rounded-lg shadow-2xl w-full max-w-3xl flex overflow-hidden">
+      <!-- Área Central (Card) -->
+      <!-- 'flex-1' faz essa área ocupar o restante da tela, centralizando o cartão -->
+      <main class="flex-1 flex items-center justify-center p-4">
 
-            <!-- Formulário (Esquerda): Paddings (p-6) e espaçamentos (mb-6, space-y-3) reduzidos -->
-            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
-              <div class="text-center mb-6">
-                <h1 class="text-xl md:text-2xl font-bold text-gray-800 mb-1">Bem-Vindo ao Portal!</h1>
-              </div>
+        <!-- Cartão: Tamanho reduzido de max-w-4xl para max-w-3xl para ficar mais compacto -->
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-3xl flex overflow-hidden">
 
-              <!-- Reduzido o espaço entre os inputs (space-y-3) -->
-              <form @submit.prevent="handleLogin" class="space-y-3">
-                <!-- CPF -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
-                  <input v-model="formData.cpf" type="text" placeholder="000.000.000-00" @input="formatCPF"
-                    class="form-input text-sm p-2 w-full border rounded" required />
-                </div>
-
-                <!-- Senha -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
-                  <div class="relative">
-                    <input v-model="formData.senha" :type="showPassword ? 'text' : 'password'"
-                      placeholder="Digite sua senha" class="form-input text-sm p-2 w-full border rounded" required />
-                    <button type="button" @click="showPassword = !showPassword"
-                      class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
-                      <i :class="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
-                    </button>
-                  </div>
-                  <p @click="goToPasswordRecovery"
-                    class="text-blue-500 text-xs mt-1.5 hover:underline cursor-pointer text-right">
-                    Esqueci minha senha
-                  </p>
-                </div>
-
-                <!-- Container do reCAPTCHA -->
-                <div class="my-2 flex justify-center min-h-[78px] scale-90 md:scale-100 transform origin-center">
-                  <div id="vue-recaptcha-container"></div>
-                </div>
-
-                <!-- Botões -->
-                <div class="pt-2 flex flex-col gap-2">
-                  <button type="submit"
-                    class="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition font-medium text-sm">
-                    Acessar o portal
-                  </button>
-
-                  <button type="button" @click="goToPrimeiroAcesso"
-                    class="w-full py-2 bg-white text-blue-500 border border-blue-500 rounded hover:bg-blue-50 transition font-medium text-sm">
-                    Primeiro Acesso
-                  </button>
-                </div>
-              </form>
+          <!-- Formulário (Esquerda): Paddings (p-6) e espaçamentos (mb-6, space-y-3) reduzidos -->
+          <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+            <div class="text-center mb-6">
+              <h1 class="text-xl md:text-2xl font-bold text-gray-800 mb-1">Bem-Vindo ao Portal!</h1>
             </div>
 
-            <!-- Lado Cinza (Direita) -->
-            <div class="hidden md:block md:w-1/2 bg-gray-200"></div>
+            <!-- Reduzido o espaço entre os inputs (space-y-3) -->
+            <form @submit.prevent="handleLogin" class="space-y-3">
+              <!-- CPF -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+                <input v-model="formData.cpf" type="text" placeholder="000.000.000-00" @input="formatCPF"
+                  class="form-input text-sm p-2 w-full border rounded" required />
+              </div>
 
+              <!-- Senha -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                <div class="relative">
+                  <input v-model="formData.senha" :type="showPassword ? 'text' : 'password'"
+                    placeholder="Digite sua senha" class="form-input text-sm p-2 w-full border rounded" required />
+                  <button type="button" @click="showPassword = !showPassword"
+                    class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
+                    <i class="pi pi-eye"></i>
+                  </button>
+                </div>
+                <p @click="goToPasswordRecovery"
+                  class="text-blue-500 text-xs mt-1.5 hover:underline cursor-pointer text-right">
+                  Esqueci minha senha
+                </p>
+              </div>
+
+              <!-- Container do reCAPTCHA -->
+              <div class="my-2 flex justify-center min-h-[78px] scale-90 md:scale-100 transform origin-center">
+                <div id="vue-recaptcha-container"></div>
+              </div>
+
+              <!-- Botões -->
+              <div class="pt-2 flex flex-col gap-2">
+                <button type="submit"
+                  class="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition font-medium text-sm">
+                  Acessar o portal
+                </button>
+
+                <button type="button" @click="goToPrimeiroAcesso"
+                  class="w-full py-2 bg-white text-blue-500 border border-blue-500 rounded hover:bg-blue-50 transition font-medium text-sm">
+                  Primeiro Acesso
+                </button>
+              </div>
+            </form>
           </div>
-        </main>
+
+          <!-- Lado Cinza (Direita) -->
+          <div class="hidden md:block md:w-1/2 bg-gray-200"></div>
+
+        </div>
+      </main>
     </div>
   </div>
- 
+
 </template>
 
 <script setup>

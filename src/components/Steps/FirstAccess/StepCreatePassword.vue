@@ -19,28 +19,17 @@
           Nova Senha
         </label>
         <div class="relative">
-          <input
-            v-model="formData.novaSenha"
-            :type="showNewPassword ? 'text' : 'password'"
-            placeholder="Digite sua senha"
-            @input="checkPasswordRequirements"
-            class="form-input"
-            required
-          />
-          <button
-            type="button"
-            @click="showNewPassword = !showNewPassword"
-            class="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
-          >
-            <i :class="showNewPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
+          <input v-model="formData.novaSenha" :type="showNewPassword ? 'text' : 'password'"
+            placeholder="Digite sua senha" @input="checkPasswordRequirements" class="form-input" required />
+          <button type="button" @click="showNewPassword = !showNewPassword"
+            class="absolute right-3 top-3 text-gray-500 hover:text-gray-700">
+            <i class="pi pi-eye"></i>
           </button>
         </div>
 
         <!-- Password Requirements -->
         <div class="mt-4 space-y-2">
-          <div
-            :class="['requirement', { 'met': requirements.minLength }]"
-          >
+          <div :class="['requirement', { 'met': requirements.minLength }]">
             <i :class="requirements.minLength ? 'pi pi-check' : 'pi pi-times'" />
             <span>No mínimo 8 caracteres</span>
           </div>
@@ -65,19 +54,11 @@
           Confirme a nova senha
         </label>
         <div class="relative">
-          <input
-            v-model="formData.confirmeSenha"
-            :type="showConfirmPassword ? 'text' : 'password'"
-            placeholder="Digite novamente sua senha"
-            class="form-input"
-            required
-          />
-          <button
-            type="button"
-            @click="showConfirmPassword = !showConfirmPassword"
-            class="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
-          >
-            <i :class="showConfirmPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
+          <input v-model="formData.confirmeSenha" :type="showConfirmPassword ? 'text' : 'password'"
+            placeholder="Digite novamente sua senha" class="form-input" required />
+          <button type="button" @click="showNewPassword = !showNewPassword"
+            class="absolute right-3 top-3 text-gray-500 hover:text-gray-700">
+            <i class="pi pi-eye"></i>
           </button>
         </div>
         <div v-if="formData.confirmeSenha && !passwordsMatch" class="error-message">
@@ -86,19 +67,11 @@
       </div>
 
       <!-- Action Buttons -->
-      <button
-        type="submit"
-        :disabled="!isFormValid"
-        class="btn-primary mt-6"
-      >
+      <button type="submit" :disabled="!isFormValid" class="btn-primary mt-6">
         Continuar
       </button>
 
-      <button
-        type="button"
-        @click="handleBack"
-        class="btn-secondary"
-      >
+      <button type="button" @click="handleBack" class="btn-secondary">
         Voltar
       </button>
     </form>
