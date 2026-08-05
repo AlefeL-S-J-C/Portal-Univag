@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.modal-card {
+  @apply bg-white rounded-lg shadow-2xl;
+}
+
+.form-input {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200;
+}
+
+.btn-primary {
+  @apply w-full px-4 py-3 bg-blue-500 text-white rounded-md font-medium hover:bg-blue-600 transition duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply w-full px-4 py-3 bg-white text-blue-500 border-2 border-blue-500 rounded-md font-medium hover:bg-blue-50 transition duration-200;
+}
+
+.progress-bar {
+  @apply h-2 bg-gray-300 rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full bg-blue-500 transition-all duration-300;
+}
+
+.text-link {
+  @apply text-blue-500 hover:text-blue-600 cursor-pointer underline;
+}
+
+.error-message {
+  @apply text-red-500 text-sm mt-2;
+}
+
+.success-message {
+  @apply text-green-600 text-sm mt-2;
+}
+
+.requirement {
+  @apply text-sm flex items-center gap-2;
+}
+
+.requirement.met {
+  @apply text-green-600;
+}
+
+.requirement.unmet {
+  @apply text-gray-500;
+}
