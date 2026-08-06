@@ -1,20 +1,24 @@
 <template>
-  <div>
-    <!-- Progress Bar -->
-    <div class="mb-8">
-      <div class="flex justify-between items-center mb-2">
-        <h2 class="text-2xl font-bold text-gray-800">Altere sua senha</h2>
-        <span class="text-gray-600 text-sm">Passo 3 de 4</span>
-      </div>
-      <div class="progress-bar">
+ <div class="flex flex-col h-full w-full pt-3">
+    <div class="absolute top-0 left-0 w-full">
+      <div class="progress-bar rounded-none rounded-t-lg h-2">
         <div class="progress-fill" style="width: 75%"></div>
       </div>
+      <div class="w-full text-right px-8 pt-1">
+        <span class="text-gray-500 text-xs font-medium">Passo 3 de 4</span>
+      </div>
     </div>
+
+    <div class="flex-4 flex flex-col justify-start pt-6">
+
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">
+       Altere sua Senha
+      </h2>
+
 
     <!-- Form -->
     <form @submit.prevent="handleChangePassword" class="space-y-4">
       <!-- New Password Field -->
-      <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">
           Nova Senha
         </label>
@@ -27,15 +31,10 @@
             class="form-input"
             required
           />
-          <button
-            type="button"
-            @click="showNewPassword = !showNewPassword"
-            class="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
-          >
-            <i :class="showNewPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
-          </button>
-        </div>
-
+        <button type="button" @click="showNewPassword = !showNewPassword"
+                    class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
+                    <i :class="showNewPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
+                  </button>
         <!-- Password Requirements -->
         <div class="mt-4 space-y-2">
           <div
@@ -72,13 +71,10 @@
             class="form-input"
             required
           />
-          <button
-            type="button"
-            @click="showConfirmPassword = !showConfirmPassword"
-            class="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
-          >
-            <i :class="showConfirmPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
-          </button>
+          <button type="button" @click="showConfirmPassword = !showConfirmPassword"
+                    class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
+                    <i :class="showConfirmPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
+                  </button>
         </div>
         <div v-if="formData.confirmeSenha && !passwordsMatch" class="error-message">
           As senhas não correspondem
@@ -94,15 +90,12 @@
         Criar nova senha
       </button>
 
-      <button
-        type="button"
-        @click="handleBack"
-        class="btn-secondary"
-      >
+      <button type="button" @click="handleBack" class="btn-tertiary mt-4">
         Voltar
       </button>
     </form>
   </div>
+ </div>
 </template>
 
 <script setup>

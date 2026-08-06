@@ -54,6 +54,18 @@ body {
   disabled:translate-y-0;
 }
 
+.btn-tertiary {
+  @apply w-full px-4 py-3 rounded-md font-medium transition-all
+  bg-transparent text-[#64748B]
+  hover:bg-[#F0F7FF] hover:text-[#4099FF]
+  active:bg-[#E1F0FF] active:text-[#2A7DDB] active:translate-y-[1px]
+
+  disabled:bg-transparent
+  disabled:text-[#C0D4E8]
+  disabled:cursor-not-allowed
+  disabled:translate-y-0;
+}
+
 .progress-bar {
   @apply h-2 bg-gray-300 rounded-full overflow-hidden;
 }
@@ -84,4 +96,24 @@ body {
 
 .requirement.unmet {
   @apply text-gray-500;
+}
+
+.bg-degrade-azul {
+  background-color: #0b3d75;
+  background-image:
+    radial-gradient(circle at 100% 0%, rgb(142, 214, 255) 0%, transparent 45%),
+    radial-gradient(circle at 0% 100%, rgb(142, 214, 255) 0%, transparent 45%),
+    linear-gradient(135deg, #073C87 90%, #032555 100%);
+}
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
 }

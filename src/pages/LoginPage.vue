@@ -1,11 +1,9 @@
 <template>
+  <!-- O bg-degrade-azul agora vem do seu CSS global -->
   <div class="h-screen w-full flex flex-col bg-degrade-azul overflow-hidden">
-    <!-- Container Principal: 'flex-col' empilha header, main e footer naturalmente -->
     <div class="min-h-screen w-full flex flex-col bg-degrade-azul">
 
-      <!-- Header: Sem 'fixed', agora ele empurra o cartão para baixo de forma correta -->
       <header class="w-full mt-6 flex justify-center gap-8 py-4 flex-shrink-0"> 
-        
         <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base "
           :class="activeTab === 'portal' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
           @click="activeTab = 'portal'">
@@ -19,73 +17,59 @@
           @click="activeTab = 'help'">
           Central de ajuda
         </button>
-
       </header>
   
-        <!-- Área Central (Card) -->
-        <!-- 'flex-1' faz essa área ocupar o restante da tela, centralizando o cartão -->
-            <main class="flex-1 flex items-center justify-center p-4">
+      <main class="flex-1 flex items-center justify-center p-4">
+        <!-- Substituímos as classes repetidas pela sua classe universal 'modal-card' -->
+        <div class="modal-card w-full max-w-3xl flex overflow-hidden">
 
-          <!-- Cartão: Tamanho reduzido de max-w-4xl para max-w-3xl para ficar mais compacto -->
-          <div class="bg-white rounded-lg shadow-2xl w-full max-w-3xl flex overflow-hidden">
-
-            <!-- Formulário (Esquerda): Paddings (p-6) e espaçamentos (mb-6, space-y-3) reduzidos -->
-            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
-              <div class="text-center mb-6">
-                <h1 class="text-xl md:text-2xl font-bold text-gray-800 mb-1">Bem-Vindo ao Portal!</h1>
-              </div>
-
-              <!-- Reduzido o espaço entre os inputs (space-y-3) -->
-              <form @submit.prevent="handleLogin" class="space-y-3">
-                <!-- CPF -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
-                  <input v-model="formData.cpf" type="text" placeholder="000.000.000-00" @input="formatCPF"
-                    class="input-field form-input text-sm p-2 w-full border rounded" required />
-                </div>
-
-                <!-- Senha -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
-                  <div class="relative">
-                    <input v-model="formData.senha" :type="showPassword ? 'text' : 'password'"
-                      placeholder="Digite sua senha" class="form-input text-sm p-2 w-full border rounded" required />
-                    <button type="button" @click="showPassword = !showPassword"
-                      class="input-field absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
-                      <i :class="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
-                    </button>
-                  </div>
-                  <p @click="goToPasswordRecovery"
-                    class="link-url">
-                    Esqueci minha senha
-                  </p>
-                </div>
-
-                <!-- Container do reCAPTCHA -->
-                <div class="my-2 flex justify-center min-h-[78px] scale-90 md:scale-100 transform origin-center">
-                  <div id="vue-recaptcha-container"></div>
-                </div>
-
-                <!-- Botões -->
-                <div class="pt-2 flex flex-col gap-2">
-                  <button type="submit"
-                    class="btn-primary w-full">
-                    Acessar o portal
-                  </button>
-
-                  <button type="button" @click="goToPrimeiroAcesso"
-                    class="btn-secondary w-full">
-                    Primeiro Acesso
-                  </button>
-                </div>
-              </form>
+          <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+            <div class="text-center mb-6">
+              <h1 class="text-xl md:text-2xl font-bold text-gray-800 mb-1">Bem-Vindo ao Portal!</h1>
             </div>
 
-            <!-- Lado Cinza (Direita) -->
-            <div class="hidden md:block md:w-1/2 bg-gray-200"></div>
+            <!-- O restante do seu formulário já usa suas classes universais (.form-input, .btn-primary, etc.) -->
+            <form @submit.prevent="handleLogin" class="space-y-3">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+                <input v-model="formData.cpf" type="text" placeholder="000.000.000-00" @input="formatCPF"
+                  class="input-field form-input text-sm p-2 w-full border rounded" required />
+              </div>
 
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                <div class="relative">
+                  <input v-model="formData.senha" :type="showPassword ? 'text' : 'password'"
+                    placeholder="Digite sua senha" class="form-input text-sm p-2 w-full border rounded" required />
+                  <button type="button" @click="showPassword = !showPassword"
+                    class="input-field absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
+                    <i :class="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
+                  </button>
+                </div>
+                <p @click="goToPasswordRecovery" class="link-url">
+                  Esqueci minha senha
+                </p>
+              </div>
+
+              <div class="my-2 flex justify-center min-h-[78px] scale-90 md:scale-100 transform origin-center">
+                <div id="vue-recaptcha-container"></div>
+              </div>
+
+              <div class="pt-2 flex flex-col gap-2">
+                <button type="submit" class="btn-primary w-full">
+                  Acessar o portal
+                </button>
+                <button type="button" @click="goToPrimeiroAcesso" class="btn-secondary w-full">
+                  Primeiro Acesso
+                </button>
+              </div>
+            </form>
           </div>
-        </main>
+
+          <div class="hidden md:block md:w-1/2 bg-gray-200"></div>
+
+        </div>
+      </main>
     </div>
   </div>
 </template>
@@ -219,13 +203,5 @@ const goToPasswordRecovery = () => {
 <style scoped>
 :deep(.pi) {
   font-size: 1rem;
-}
-
-.bg-degrade-azul {
-  background-color: #0b3d75;
-  background-image:
-    radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.7) 0%, transparent 45%),
-    radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.6) 0%, transparent 45%),
-    linear-gradient(135deg, #073C87 90%, #032555 100%);
-}
-</style>
+  }
+  </style>

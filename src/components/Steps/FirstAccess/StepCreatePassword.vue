@@ -1,18 +1,25 @@
 <template>
-  <div>
-    <!-- Progress Bar -->
-    <div class="mb-8">
-      <div class="flex justify-between items-center mb-2">
-        <h2 class="text-2xl font-bold text-gray-800">Crie sua senha</h2>
-        <span class="text-gray-600 text-sm">Passo 3 de 4</span>
-      </div>
-      <div class="progress-bar">
+ <div class="flex flex-col h-full w-full pt-3">
+    <div class="absolute top-0 left-0 w-full">
+      <div class="progress-bar rounded-none rounded-t-lg h-2">
         <div class="progress-fill" style="width: 75%"></div>
+      </div>
+      <div class="w-full text-right px-8 pt-1">
+        <span class="text-gray-500 text-xs font-medium">Passo 3 de 4</span>
       </div>
     </div>
 
+
+
+    <div class="flex-4 flex flex-col justify-start pt-6">
+
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">
+        Crie sua Senha
+      </h2>
+
+
     <!-- Form -->
-    <form @submit.prevent="handleCreatePassword" class="space-y-4">
+    <form @submit.prevent="handleChangePassword" class="space-y-4">
       <!-- New Password Field -->
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -91,18 +98,15 @@
         :disabled="!isFormValid"
         class="btn-primary mt-6"
       >
-        Continuar
+        Criar nova senha
       </button>
 
-      <button
-        type="button"
-        @click="handleBack"
-        class="btn-secondary"
-      >
+      <button type="button" @click="handleBack" class="btn-tertiary mt-4">
         Voltar
       </button>
     </form>
   </div>
+ </div>
 </template>
 
 <script setup>
@@ -149,7 +153,7 @@ const checkPasswordRequirements = () => {
   requirements.value.special = /[@#$!]/.test(password)
 }
 
-const handleCreatePassword = async () => {
+const handleChangePassword = async () => {
   if (!isFormValid.value) {
     toast.add({
       severity: 'warn',
@@ -161,11 +165,11 @@ const handleCreatePassword = async () => {
   }
 
   try {
-    // Simular criação de senha com backend
+    // Simular mudança de senha com backend
     toast.add({
       severity: 'success',
       summary: 'Sucesso',
-      detail: 'Senha criada com sucesso',
+      detail: 'Senha alterada com sucesso',
       life: 2000
     })
 
@@ -176,7 +180,7 @@ const handleCreatePassword = async () => {
     toast.add({
       severity: 'error',
       summary: 'Erro',
-      detail: 'Falha ao criar senha',
+      detail: 'Falha ao alterar senha',
       life: 3000
     })
   }

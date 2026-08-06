@@ -1,28 +1,28 @@
 <template>
+  <!-- Container Principal com o fundo degradê -->
   <div class="min-h-screen w-full flex flex-col bg-degrade-azul">
-        
-    <header class="w-full mt-6 flex justify-center gap-8 py-4 flex-shrink-0"> 
-        
-        <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base "
-          :class="activeTab === 'portal' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
-          @click="activeTab = 'portal'">
-          Entre em contato
-        </button>
 
-        <img src="../images/logo-univag.png" alt="Logo Univag" class="h-10 md:h-12">
+    <header class="w-full mt-6 flex justify-center gap-8 py-4 flex-shrink-0">
+      <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base "
+        :class="activeTab === 'portal' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
+        @click="activeTab = 'portal'">
+        Entre em contato
+      </button>
 
-        <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base border-b-2"
-          :class="activeTab === 'help' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
-          @click="activeTab = 'help'">
-          Central de ajuda
-        </button>
+      <img src="../images/logo-univag.png" alt="Logo Univag" class="h-10 md:h-12">
 
-      </header>
+      <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base border-b-2"
+        :class="activeTab === 'help' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
+        @click="activeTab = 'help'">
+        Central de ajuda
+      </button>
+    </header>
 
-    <div class="flex-1 flex items-center justify-center p-4">
-      <div class="w-full max-w-2xl">
-        <!-- Steps Container -->
-        <div class="bg-white rounded-lg shadow-2xl p-8">
+   <main class="flex-1 flex items-center justify-center p-4">
+      <!-- Alterado de max-w-2xl para max-w-md para deixar o cartão estreito -->
+      <div class="w-full max-w-md">
+
+        <div class="modal-card p-8 min-h-[550px] flex flex-col justify-center relative">
           <!-- Step 1: Identification -->
           <template v-if="currentStep === 1">
             <StepIdentification @next="handleStepNext" />
@@ -43,8 +43,10 @@
             <StepSuccess />
           </template>
         </div>
+
       </div>
-    </div>
+    </main>
+
   </div>
 </template>
 
@@ -73,13 +75,5 @@ const handleStepBack = () => {
 <style scoped>
 :deep(.pi) {
   font-size: 1rem;
-}
-
-.bg-degrade-azul {
-  background-color: #0b3d75;
-  background-image:
-    radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.7) 0%, transparent 45%),
-    radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.6) 0%, transparent 45%),
-    linear-gradient(135deg, #073C87 90%, #032555 100%);
 }
 </style>

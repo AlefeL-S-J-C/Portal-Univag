@@ -1,26 +1,27 @@
 <template>
-  <div>
-    <!-- Progress Bar -->
-    <div class="mb-8">
-      <div class="flex justify-between items-center mb-2">
-        <h2 class="text-2xl font-bold text-gray-800">Validação do Token</h2>
-        <span class="text-gray-600 text-sm">Passo 2 de 4</span>
-      </div>
-      <div class="progress-bar">
+    <div class="flex flex-col h-full w-full pt-3">
+    <div class="absolute top-0 left-0 w-full">
+      <div class="progress-bar rounded-none rounded-t-lg h-2">
         <div class="progress-fill" style="width: 50%"></div>
+      </div>
+      <div class="w-full text-right px-8 pt-1">
+        <span class="text-gray-500 text-xs font-medium">Passo 2 de 4</span>
       </div>
     </div>
 
-    <!-- Subtitle -->
-    <p class="text-gray-600 mb-6 text-center text-sm">
-      Enviamos um código de verificação de 6 dígitos em seu email registrado
-    </p>
+    <div class="flex-4 flex flex-col justify-start pt-10">
 
-    <!-- Form -->
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">
+        Validação de Token
+      </h2>
+
+      <p class="text-gray-600 mb-10 text-justify text-lg">
+        Informe o código de verificação enviado para seu e-mail.
+      </p>
+
     <form @submit.prevent="handleVerify" class="space-y-4">
-      <!-- Token Field -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">
+        <label class="block text-md font-medium text-gray-700 mb-2">
           Código de verificação
         </label>
         <input
@@ -34,7 +35,6 @@
         />
       </div>
 
-      <!-- Resend Link with Timer -->
       <div class="text-center">
         <span v-if="canResend" class="text-blue-500 text-xs hover:underline cursor-pointer" @click="handleResendToken">
           Reenviar código
@@ -45,19 +45,16 @@
       </div>
 
       <!-- Action Buttons -->
-      <button type="submit" class="btn-primary mt-6">
-        Verifique e continue
+      <button type="submit" class="btn-primary mt-32">
+        Verificar e Continuar
       </button>
 
-      <button
-        type="button"
-        @click="handleBack"
-        class="btn-secondary"
-      >
+      <button type="button" @click="handleBack" class="btn-tertiary mt-4">
         Cancelar
       </button>
     </form>
   </div>
+    </div>
 </template>
 
 <script setup>

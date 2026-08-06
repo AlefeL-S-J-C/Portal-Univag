@@ -1,46 +1,40 @@
 <template>
-  <div>
-    <!-- Progress Bar -->
-    <div class="mb-8">
-      <div class="flex justify-between items-center mb-2">
-        <h2 class="text-2xl font-bold text-gray-800">Recuperação de Senha</h2>
-        <span class="text-gray-600 text-sm">Passo 1 de 4</span>
-      </div>
-      <div class="progress-bar">
+  <div class="flex flex-col h-full w-full pt-3">
+    <div class="absolute top-0 left-0 w-full">
+      <div class="progress-bar rounded-none rounded-t-lg h-2">
         <div class="progress-fill" style="width: 25%"></div>
+      </div>
+      <div class="w-full text-right px-8 pt-1">
+        <span class="text-gray-500 text-xs font-medium">Passo 1 de 4</span>
       </div>
     </div>
 
-    <!-- Subtitle -->
-    <p class="text-gray-600 mb-6 text-center text-sm">
-      Informe e-mail cadastrado para receber o código de recuperação.
-    </p>
+    <div class="flex-4 flex flex-col justify-start pt-10">
 
-    <!-- Form -->
-    <form @submit.prevent="handleContinue" class="space-y-4">
-      <!-- Email Field -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
-        <input
-          v-model="formData.email"
-          type="email"
-          placeholder="nomesobrenome@gmail.com"
-          class="form-input"
-          required
-        />
-      </div>
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">
+        Recuperação de Senha
+      </h2>
 
-      <!-- Action Button -->
-      <button type="submit" class="btn-primary mt-6">
-        Continuar
+      <p class="text-gray-600 mb-16 text-justify text-lg">
+        Informe e-mail cadastrado para receber o código de recuperação.
+      </p>
+
+      <form @submit.prevent="handleContinue" class="flex flex-col flex-1">
+        <div>
+          <label class="block text-md font-medium text-gray-700 mb-2">E-mail</label>
+          <input v-model="formData.email" type="email" placeholder="nomesobrenome@gmail.com" class="form-input"
+            required />
+        </div>
+
+        <button type="submit" class="btn-primary mt-12">
+          Continuar
+        </button>
+  
+
+      <button type="button" @click="handleReturnToLogin" class="btn-tertiary mt-4">
+        Voltar ao Login
       </button>
-    </form>
-
-    <!-- Back Link -->
-    <div class="mt-6 text-center">
-      <router-link to="/login" class="text-blue-500 text-sm hover:underline">
-        Voltar para login
-      </router-link>
+      </form>
     </div>
   </div>
 </template>
@@ -48,9 +42,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
+import { useRouter } from 'vue-router'
 
 const emit = defineEmits(['next'])
 const toast = useToast()
+const router = useRouter()
 
 const formData = ref({
   email: ''
@@ -83,7 +79,6 @@ const handleContinue = async () => {
   }
 
   try {
-    // Simular busca e envio de código
     toast.add({
       severity: 'success',
       summary: 'Sucesso',
@@ -103,8 +98,11 @@ const handleContinue = async () => {
     })
   }
 }
-</script>
 
+const handleReturnToLogin = () => {
+  router.push('/login')
+}
+</script>
 <style scoped>
 /* Styles específicos do componente */
 </style>
