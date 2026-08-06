@@ -1,9 +1,8 @@
 <template>
   <div>
     <!-- Progress Bar -->
-    <div class="mb-8">
+    <div class="mb-6">
       <div class="flex justify-between items-center mb-2">
-        <h2 class="text-2xl font-bold text-gray-800">Validação do Token</h2>
         <span class="text-gray-600 text-sm">Passo 2 de 4</span>
       </div>
       <div class="progress-bar">
@@ -11,8 +10,9 @@
       </div>
     </div>
 
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Validação do Token</h2>
     <!-- Subtitle -->
-    <p class="text-gray-600 mb-6 text-center text-sm">
+    <p class="text-gray-600 mb-6 text-center text-sm text-center">
       Enviamos um código de verificação de 6 dígitos em seu email registrado
     </p>
 

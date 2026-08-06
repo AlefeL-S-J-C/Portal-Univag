@@ -1,9 +1,8 @@
 <template>
   <div>
     <!-- Progress Bar -->
-    <div class="mb-8">
+    <div class="mb-6">
       <div class="flex justify-between items-center mb-2">
-        <h2 class="text-2xl font-bold text-gray-800">Identifique-se</h2>
         <span class="text-gray-600 text-sm">Passo 1 de 4</span>
       </div>
       <div class="progress-bar">
@@ -11,8 +10,9 @@
       </div>
     </div>
 
+    <h2 class="text-2xl font-bold text-gray-800 text-center">Identifique-se</h2>
     <!-- Subtitle -->
-    <p class="text-gray-600 mb-6 text-center">
+    <p class="text-gray-600 mb-4 text-center">
       Por favor, preencha os campos
     </p>
 

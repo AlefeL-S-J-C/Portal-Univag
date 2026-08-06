@@ -4,18 +4,22 @@
     <div class="min-h-screen w-full flex flex-col bg-degrade-azul">
 
       <!-- Header: Sem 'fixed', agora ele empurra o cartão para baixo de forma correta -->
-      <header class="w-full flex justify-center gap-8 py-4 flex-shrink-0"> <button
-          class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base "
+      <header class="w-full mt-6 flex justify-center gap-8 py-4 flex-shrink-0"> 
+        
+        <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base "
           :class="activeTab === 'portal' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
           @click="activeTab = 'portal'">
           Entre em contato
         </button>
+
+        <img src="../images/logo-univag.png" alt="Logo Univag" class="h-10 md:h-12">
 
         <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base border-b-2"
           :class="activeTab === 'help' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
           @click="activeTab = 'help'">
           Central de ajuda
         </button>
+
       </header>
   
         <!-- Área Central (Card) -->
@@ -37,7 +41,7 @@
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
                   <input v-model="formData.cpf" type="text" placeholder="000.000.000-00" @input="formatCPF"
-                    class="form-input text-sm p-2 w-full border rounded" required />
+                    class="input-field form-input text-sm p-2 w-full border rounded" required />
                 </div>
 
                 <!-- Senha -->
@@ -47,12 +51,12 @@
                     <input v-model="formData.senha" :type="showPassword ? 'text' : 'password'"
                       placeholder="Digite sua senha" class="form-input text-sm p-2 w-full border rounded" required />
                     <button type="button" @click="showPassword = !showPassword"
-                      class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
+                      class="input-field absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
                       <i :class="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'" />
                     </button>
                   </div>
                   <p @click="goToPasswordRecovery"
-                    class="text-blue-500 text-xs mt-1.5 hover:underline cursor-pointer text-right">
+                    class="link-url">
                     Esqueci minha senha
                   </p>
                 </div>
@@ -65,12 +69,12 @@
                 <!-- Botões -->
                 <div class="pt-2 flex flex-col gap-2">
                   <button type="submit"
-                    class="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition font-medium text-sm">
+                    class="btn-primary w-full">
                     Acessar o portal
                   </button>
 
                   <button type="button" @click="goToPrimeiroAcesso"
-                    class="w-full py-2 bg-white text-blue-500 border border-blue-500 rounded hover:bg-blue-50 transition font-medium text-sm">
+                    class="btn-secondary w-full">
                     Primeiro Acesso
                   </button>
                 </div>
@@ -84,7 +88,6 @@
         </main>
     </div>
   </div>
- 
 </template>
 
 <script setup>

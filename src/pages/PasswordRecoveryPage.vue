@@ -1,13 +1,26 @@
 <template>
   <div class="min-h-screen w-full flex flex-col bg-degrade-azul">
+    
+    <header class="w-full mt-6 flex justify-center gap-8 py-4 flex-shrink-0"> 
+        
+        <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base "
+          :class="activeTab === 'portal' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
+          @click="activeTab = 'portal'">
+          Entre em contato
+        </button>
+
+        <img src="../images/logo-univag.png" alt="Logo Univag" class="h-10 md:h-12">
+
+        <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base border-b-2"
+          :class="activeTab === 'help' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
+          @click="activeTab = 'help'">
+          Central de ajuda
+        </button>
+
+      </header>
+
   <div class="flex-1 flex items-center justify-center p-4">
     <div class="w-full max-w-2xl">
-      <!-- Navigation Links -->
-      <div class="flex justify-center gap-8 mb-8 text-white text-sm">
-        <button class="hover:text-blue-400 transition">Entre em contato</button>
-        <span class="text-gray-500">|</span>
-        <button class="hover:text-blue-400 transition">Central de ajuda</button>
-      </div>
 
       <!-- Steps Container -->
       <div class="bg-white rounded-lg shadow-2xl p-8">
