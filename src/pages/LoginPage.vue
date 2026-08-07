@@ -3,10 +3,10 @@
   <div class="h-screen w-full flex flex-col bg-degrade-azul overflow-hidden">
     <div class="min-h-screen w-full flex flex-col bg-degrade-azul">
 
-      <header class="w-full mt-6 flex justify-center gap-8 py-4 flex-shrink-0"> 
+      <header class="w-full mt-6 flex justify-center gap-8 py-4 flex-shrink-0">
         <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base "
           :class="activeTab === 'portal' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
-          @click="activeTab = 'portal'">
+          @click="showContactModal = true">
           Entre em contato
         </button>
 
@@ -14,11 +14,11 @@
 
         <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base border-b-2"
           :class="activeTab === 'help' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
-          @click="activeTab = 'help'">
+          @click="showHelpModal = true">
           Central de ajuda
         </button>
       </header>
-  
+
       <main class="flex-1 flex items-center justify-center p-4">
         <!-- Substituímos as classes repetidas pela sua classe universal 'modal-card' -->
         <div class="modal-card w-full max-w-3xl flex overflow-hidden">
@@ -67,9 +67,11 @@
           </div>
 
           <div class="hidden md:block md:w-1/2 bg-gray-200"></div>
-
         </div>
       </main>
+      <HelpCenterModal :isOpen="showHelpModal" @close="showHelpModal = false"
+        @contact="showHelpModal = false; showContactModal = true" />
+      <ContactModal :isOpen="showContactModal" @close="showContactModal = false" />
     </div>
   </div>
 </template>
@@ -78,12 +80,16 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
+import ContactModal from '../components/ContactModal.vue'
+import HelpCenterModal from '../components/HelpCenterModal.vue'
 
 const router = useRouter()
 const toast = useToast()
 
 const activeTab = ref('portal')
 const showPassword = ref(false)
+const showContactModal = ref(false)
+const showHelpModal = ref(false)
 
 // Estados reativos do Vue para o reCAPTCHA
 const captchaVerified = ref(false)
@@ -203,5 +209,5 @@ const goToPasswordRecovery = () => {
 <style scoped>
 :deep(.pi) {
   font-size: 1rem;
-  }
-  </style>
+}
+</style>

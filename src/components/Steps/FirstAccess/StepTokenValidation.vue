@@ -1,26 +1,27 @@
 <template>
-  <div>
-    <!-- Progress Bar -->
-    <div class="mb-6">
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-gray-600 text-sm">Passo 2 de 4</span>
-      </div>
-      <div class="progress-bar">
+    <div class="flex flex-col h-full w-full pt-3">
+    <div class="absolute top-0 left-0 w-full">
+      <div class="progress-bar rounded-none rounded-t-lg h-2">
         <div class="progress-fill" style="width: 50%"></div>
+      </div>
+      <div class="w-full text-right px-8 pt-1">
+        <span class="text-gray-500 text-xs font-medium">Passo 2 de 4</span>
       </div>
     </div>
 
-    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Validação do Token</h2>
-    <!-- Subtitle -->
-    <p class="text-gray-600 mb-6 text-center text-sm text-center">
-      Enviamos um código de verificação de 6 dígitos em seu email registrado
-    </p>
+    <div class="flex-4 flex flex-col justify-start pt-10">
 
-    <!-- Form -->
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">
+        Validação de Token
+      </h2>
+
+      <p class="text-gray-600 mb-10 text-justify text-lg">
+        Informe o código de verificação enviado para seu e-mail.
+      </p>
+
     <form @submit.prevent="handleVerify" class="space-y-4">
-      <!-- Token Field -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">
+        <label class="block text-md font-medium text-gray-700 mb-2">
           Código de verificação
         </label>
         <input
@@ -34,29 +35,30 @@
         />
       </div>
 
-      <!-- Resend Link -->
-      <p class="text-blue-500 text-xs hover:underline cursor-pointer text-center">
-        Reenviar código em 00:59
-      </p>
+      <div class="text-center">
+        <span v-if="canResend" class="text-blue-500 text-xs hover:underline cursor-pointer" @click="handleResendToken">
+          Reenviar código
+        </span>
+        <span v-else class="text-blue-500 text-xs">
+          Reenviar código em {{ timerDisplay }}
+        </span>
+      </div>
 
       <!-- Action Buttons -->
-      <button type="submit" class="btn-primary mt-6">
-        Verifique e continue
+      <button type="submit" class="btn-primary mt-32">
+        Verificar e Continuar
       </button>
 
-      <button
-        type="button"
-        @click="handleBack"
-        class="btn-secondary"
-      >
+      <button type="button" @click="handleBack" class="btn-tertiary mt-4">
         Cancelar
       </button>
     </form>
   </div>
+    </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useToast } from 'primevue/usetoast'
 
 const emit = defineEmits(['next', 'back'])
@@ -65,6 +67,40 @@ const toast = useToast()
 const formData = ref({
   token: ''
 })
+
+const timeRemaining = ref(59)
+const canResend = ref(false)
+let timerInterval
+
+const timerDisplay = computed(() => {
+  const minutes = Math.floor(timeRemaining.value / 60)
+  const seconds = timeRemaining.value % 60
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+})
+
+onMounted(() => {
+  startTimer()
+})
+
+onBeforeUnmount(() => {
+  if (timerInterval) {
+    clearInterval(timerInterval)
+  }
+})
+
+const startTimer = () => {
+  timeRemaining.value = 59
+  canResend.value = false
+
+  timerInterval = setInterval(() => {
+    timeRemaining.value--
+
+    if (timeRemaining.value <= 0) {
+      clearInterval(timerInterval)
+      canResend.value = true
+    }
+  }, 1000)
+}
 
 const formatToken = (event) => {
   let value = event.target.value.replace(/\D/g, '')
@@ -107,7 +143,29 @@ const handleVerify = async () => {
   }
 }
 
+const handleResendToken = async () => {
+  try {
+    toast.add({
+      severity: 'success',
+      summary: 'Sucesso',
+      detail: 'Código reenviado para seu e-mail',
+      life: 2000
+    })
+    startTimer()
+  } catch (error) {
+    toast.add({
+      severity: 'error',
+      summary: 'Erro',
+      detail: 'Falha ao reenviar código',
+      life: 3000
+    })
+  }
+}
+
 const handleBack = () => {
+  if (timerInterval) {
+    clearInterval(timerInterval)
+  }
   emit('back')
 }
 </script>

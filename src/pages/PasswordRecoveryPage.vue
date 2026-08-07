@@ -5,7 +5,7 @@
     <header class="w-full mt-6 flex justify-center gap-8 py-4 flex-shrink-0">
       <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base "
         :class="activeTab === 'portal' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
-        @click="activeTab = 'portal'">
+        @click="showContactModal = true">
         Entre em contato
       </button>
 
@@ -13,7 +13,7 @@
 
       <button class="text-white hover:text-blue-400 transition pb-1 font-regular text-sm md:text-base border-b-2"
         :class="activeTab === 'help' ? 'border-blue-400 text-blue-400' : 'border-transparent'"
-        @click="activeTab = 'help'">
+        @click="showHelpModal = true">
         Central de ajuda
       </button>
     </header>
@@ -45,6 +45,11 @@
         </div>
       </div>
     </main>
+    <!-- Modal de Contato -->
+    <ContactModal :isOpen="showContactModal" @close="showContactModal = false" />
+    <!-- Modal de Central de Ajuda -->
+    <HelpCenterModal :isOpen="showHelpModal" @close="showHelpModal = false"
+      @contact="showHelpModal = false; showContactModal = true" />
   </div>
 </template>
 
@@ -54,8 +59,12 @@ import StepPasswordRecoveryEmail from '../components/steps/PasswordRecovery/Step
 import StepPasswordRecoveryToken from '../components/steps/PasswordRecovery/StepPasswordRecoveryToken.vue'
 import StepPasswordRecoveryChange from '../components/steps/PasswordRecovery/StepPasswordRecoveryChange.vue'
 import StepPasswordRecoverySuccess from '../components/steps/PasswordRecovery/StepPasswordRecoverySuccess.vue'
+import ContactModal from '../components/ContactModal.vue'
+import HelpCenterModal from '../components/HelpCenterModal.vue'
 
 const currentStep = ref(1)
+const showContactModal = ref(false)
+const showHelpModal = ref(false)
 
 const handleStepNext = () => {
   if (currentStep.value < 4) {

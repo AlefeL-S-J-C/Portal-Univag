@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-col h-full w-full pt-3">
+    <!-- Barra superior -->
     <div class="absolute top-0 left-0 w-full">
       <div class="progress-bar rounded-none rounded-t-lg h-2">
         <div class="progress-fill" style="width: 100%"></div>
@@ -9,8 +10,11 @@
       </div>
     </div>
 
-      <!-- Success Content -->
-      <div class="py-8">
+    <!-- Container principal ocupando o resto da tela -->
+    <div class="flex-1 flex flex-col justify-start pt-10 pb-6 text-center">
+      
+      <!-- Container do Ícone e Textos centralizados no meio da tela -->
+      <div class="flex flex-col items-center justify-center flex-1 mt-6">
         <!-- Profile Card -->
         <div class="mb-6">
           <h3 class="text-2xl font-bold text-gray-800 mb-1">
@@ -27,24 +31,27 @@
         </div>
 
         <!-- Success Message -->
-        <div class="flex items-center justify-center gap-2 mb-8">
+        <div class="flex items-center justify-center gap-2 mb-4">
           <i class="pi pi-check text-green-600" />
           <span class="text-lg font-semibold text-gray-800">
             Cadastro concluído!
           </span>
         </div>
+      </div>
 
-        <!-- Action Button -->
-        <button @click="handleReturnToLogin" class="btn-secondary max-w-xs mx-auto mb-4">
+      <!-- Container do Botão fixo no fundo da tela -->
+      <div class="mt-auto flex flex-col gap-3 items-center w-full">
+        <button @click="handleReturnToLogin" class="btn-secondary w-full max-w-xs">
           Retornar ao login
         </button>
 
-        <!-- Redirect Message -->
         <p class="text-gray-500 text-sm">
           Redirecionando em {{ countdown }} segundos...
         </p>
       </div>
+      
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -55,14 +62,14 @@ const router = useRouter()
 const countdown = ref(10)
 let intervalId
 
-onMounted(() => {
-  intervalId = setInterval(() => {
-    countdown.value--
-    if (countdown.value <= 0) {
-      handleReturnToLogin()
-    }
-  }, 1000)
-})
+// onMounted(() => {
+//   intervalId = setInterval(() => {
+//     countdown.value--
+//     if (countdown.value <= 0) {
+//       handleReturnToLogin()
+//     }
+//   }, 1000)
+// })
 
 onBeforeUnmount(() => {
   if (intervalId) {
@@ -70,6 +77,11 @@ onBeforeUnmount(() => {
   }
 })
 
+// Função adicionada (estava faltando no StepSuccess original)
+const handleReturnToLogin = () => {
+  if (intervalId) clearInterval(intervalId)
+  router.push('/login') // Ajuste a rota para a correta do seu projeto
+}
 </script>
 
 <style scoped>

@@ -1,23 +1,22 @@
 <template>
-  <div>
-    <!-- Progress Bar -->
-    <div class="mb-6">
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-gray-600 text-sm">Passo 1 de 4</span>
-      </div>
-      <div class="progress-bar">
+ <div class="flex flex-col h-full w-full pt-3">
+    <div class="absolute top-0 left-0 w-full">
+      <div class="progress-bar rounded-none rounded-t-lg h-2">
         <div class="progress-fill" style="width: 25%"></div>
+      </div>
+      <div class="w-full text-right px-8 pt-1">
+        <span class="text-gray-500 text-xs font-medium">Passo 1 de 4</span>
       </div>
     </div>
 
     <h2 class="text-2xl font-bold text-gray-800 text-center">Identifique-se</h2>
     <!-- Subtitle -->
-    <p class="text-gray-600 mb-4 text-center">
+    <p class="text-gray-600 mb-20 text-center">
       Por favor, preencha os campos
     </p>
 
     <!-- Form -->
-    <form @submit.prevent="handleContinue" class="space-y-4">
+    <form @submit.prevent="handleContinue" class="flex flex-col flex-1">
       <!-- CPF Field -->
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">CPF</label>
@@ -44,7 +43,7 @@
       </div>
 
       <!-- Action Buttons -->
-      <button type="submit" class="btn-primary mt-6">
+      <button type="submit" class="btn-primary mt-28">
         Continuar
       </button>
     </form>
